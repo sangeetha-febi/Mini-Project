@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard';
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import LibrarianDashboard from './pages/LibrarianDashboard';
 import ErrorPage from './pages/ErrorPage';
+import AddBooks from './pages/AddBooks';
+
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/addbooks" element={<AddBooks />} />
+        
 
         <Route path="/dashboard" element={
           <ProtectedRoutes>
@@ -29,9 +33,11 @@ function App() {
           <ProtectedRoutes>
             <ErrorPage/>
           </ProtectedRoutes>
+        
         } />
         
       </Routes>
+
     </BrowserRouter>
   )
 }

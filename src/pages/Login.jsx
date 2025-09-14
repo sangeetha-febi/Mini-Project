@@ -20,17 +20,20 @@ function Login() {
     try{
       const res = await axios.get("http://localhost:8081/users");
 
-      const users = res.data.find(data => data.email === email && data.password === password && data.role===role);
+      const users = res.data.find(data => data.email === email && data.password === password && data.role === role);
       
 
       if(users){
-        
+         if(users.role ==="User"){
         dispatch({type: "LOGIN_SUCCESS", payload: users});
-         if(users.role==="User"){
+         
         navigate("/dashboard" );
         }
-        else {
+        else if(users.role ==="Librarian"){
           navigate("/librariandashboard");
+        }
+        else{
+          navigate("/error")
         }
       }
      
@@ -47,19 +50,30 @@ function Login() {
 
   return (
 
-    <div className='flex justify-center items-center min-h-screen '>
-      
-         <img src='https://www.elibrarysoftware.com/img/blog/2.jpg' className='w-full'></img>
-      <form onSubmit={handleLogin} className='bg-white p-6 rounded shadow w-80'>
+    <div className='flex justify-center items-center min-h-screen bg-gray-300 '>
+  
+    
+      <div>
+        <img src='https://www.elibrarysoftware.com/img/blog/2.jpg' className='w-full h-full object-cover pr-120 mt-25'></img>
+         <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className = "text-orange-800 text-7xl font-bold pr-80">E-Libray</h1>
+          
+      <form onSubmit={handleLogin} className='bg-gray-300 p-6 rounded shadow w-80 h-80 '>
         <h2 className='text-xl font-bold mb-4 text-center bg-orange-600 text-white px-2 py-2 '>LOGIN FORM</h2>
-        <label for="email" className='font-bold'>Enter your Email</label>
+        <label htmlFor="email" className='font-bold'>Enter your Email</label>
         <input placeholder='febi@mail.com' className='border p-2 w-full mb-3' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <label for="password" className='font-bold'>Enter your password</label>
+        <label htmlFor="password" className='font-bold'>Enter your password</label>
         <input placeholder='*****' className='border p-2 w-full mb-3' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor="Role" className='font-bold'>Enter your Role</label>
+        <input placeholder='User/Librarian' className='border p-2 w-full mb-3' type="text" value={role} onChange={(e) => setRole(e.target.value)} />
         {error && <p className='text-red-600 text-sm mb-2'>{error}</p>}
         <button type='submit' className='bg-green-600 cursor-pointer text-white px-4 py-2 w-full'>Login</button>
         <p className='mt-3 text-sm'>Don't have an account? <Link to="/register" className='text-blue-600 font-bold'>Register</Link></p>
+       
       </form>
+       </div>
+          </div>
+      
     </div>
   )
 }

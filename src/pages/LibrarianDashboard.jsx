@@ -1,15 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+//import addbooks from './AddBooks';
+import RemoveBooks from './RemoveBooks';
 
 function LibrarianDashboard() {
-  const user = useSelector(data => data.user);
-    const dispatch = useDispatch();
+  
     
+      
   return (
     <div>
       <nav className='bg-gray-700 w-screen h-15 flex cursor-pointer text-white rounded mb-3'>
         <li>
-      <button className='cursor-pointer text-white rounded py-3 px-3 bg-orange-800 absolute end-2.5 top-2.5'>Add books in Library</button> 
-      <button className='cursor-pointer text-white rounded py-3 px-3 bg-orange-800 absolute start-2.5 top-2.5'>Remove books from Library</button>
+      <Link className='text-blue-600 font-bold' to="/addbooks">
+      <button className='cursor-pointer text-white rounded py-3 px-3 bg-orange-800 absolute end-2.5 top-2.5'>Add books in Library</button> </Link>
+      <Link className='text-blue-600 font-bold' to="/RemoveBooks"> <button className='cursor-pointer text-white rounded py-3 px-3 bg-orange-800 absolute start-2.5 top-2.5'>Remove books from Library</button></Link>
+
       
       </li>
       </nav>
